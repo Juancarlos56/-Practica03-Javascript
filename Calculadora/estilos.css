@@ -1,0 +1,86 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.Calculadora {
+    width: 100%;
+    height: 600px;
+}
+
+.encabezado { 
+    width: 100%;
+    height: 50px;
+    float: left;  
+}
+
+
+.encabezado  h1{ 
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+}
+
+
+
+.separador {
+    width: 100%;
+    height: 0px;
+    background-color: white;
+    clear: both;
+}
+
+.valores {
+    width: 100%;
+    height: 400px;
+    padding: 16px;
+    margin-top: 70px;
+    border-radius: 10px;
+    margin-left: 25%;
+    
+}
+
+.valores .valCal{
+    width: 50%;
+    height: 200px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+button{
+    font-family:consolas,monospace;
+    width:20%;
+    font-size:40px;
+    height:20%;
+    
+}
+input{
+    width:82%;
+    font-size:35px;
+    height:20%;
+    color: rgb(165, 163, 158);
+    border-radius: 1px;
+    text-align: center;
+}
+
+.valores .valCal #borrarTodo {
+    width: 61%;
+    float: left;
+    font-family: consolas,monospace;
+    font-size: 40px;
+    height: 20%;
+    margin-left: 70px;
+    margin-top: -2px;
+    margin-right: 4px;
+    margin-bottom: 0px;
+}
+
+.valores .valCal #btnSuma{
+    margin-bottom: 4px;
+    width: 20%;
+    float: left;
+    font-family: consolas,monospace;
+    font-size: 40px;
+    height: 20%;
+    margin-top: -2px;
+}
