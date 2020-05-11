@@ -1,37 +1,254 @@
 function validarCamposObligatorios() {
-    var bandera = true
-
+    var bandera = true;
+    //obtenemos todos los formularios de la pagina y tomamos 
+    //cada elemento del formulario
     for(var i = 0; i < document.forms[0].elements.length; i++){
-        var elemento = document.forms[0].elements[i]
+        var elemento = document.forms[0].elements[i];
+        
         if(elemento.value == '' && elemento.type == 'text'){
-            if(elemento.id == 'cedula'){
-                document.getElementById('mensajeCedula').innerHTML = '<br>La cedula esta vacia'
+            
+            switch (elemento.id) {
+            case 'cedula':
+                //si falta la cedula se desplega esto
+                document.getElementById('mensajeCedula').innerHTML = 'La cedula esta vacia';
+                break;
+            case 'nombres': 
+                //si falta la nombres se desplega esto
+                document.getElementById('mensajeNombres').innerHTML = 'Los campos nombres esta vacio';
+                break;
+               
+            case 'apellidos': 
+                //si falta la Apellidos se desplega esto
+                document.getElementById('mensajeApellidos').innerHTML = 'Los campos apellidos esta vacio';
+                break;
+            case 'direccion': 
+                //si falta la direccion se desplega esto
+                document.getElementById('mensajeDireccion').innerHTML = 'El campo direccion esta vacio';
+                break;
+            case 'telefono': 
+                //si falta el telefono se desplega esto
+                document.getElementById('mensajeTelefono').innerHTML = 'El campo telefono esta vacio';
+                break;
+            default:
+                console.log('default');
             }
-            elemento.style.border = '1px red solid'
-            elemento.className = 'error'
-            bandera = false
+            
+            elemento.style.border = '1px red solid';
+            elemento.className = 'error';
+            bandera = false;
         }
     }
 
     if(!bandera){
-        alert('Error: revisar los comentarios')
+        alert('Error: revisar los comentarios');
     }
     return bandera
 }
 
-
+//funcion para validar el ingreso solo de letras
 function validarLetras(elemento){
     if(elemento.value.length > 0){
-        var miAscii = elemento.value.charCodeAt(elemento.value.length-1)
-        console.log(miAscii)
+        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
+        console.log(miAscii);
 
-        if(miAscii >= 97 && miAscii <= 122){
-            return true
+        if((miAscii >= 97 && miAscii <= 122) || (miAscii === 32) || (miAscii >= 65 && miAscii <= 90)){
+            return true;
         }else {
-            elemento.value = elemento.value.substring(0, elemento.value.length-1)
-            return false
+            elemento.value = elemento.value.substring(0, elemento.value.length-1);
+            return false;
+        }
+    }else{
+        return true;
+    }
+}
+
+//funcion para validar el ingreso solo de numeros
+function validarNumeros(elemento){
+    if(elemento.value.length > 0){
+        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
+
+        if(miAscii >= 48 && miAscii <= 57){
+            return true;
+        }else {
+            elemento.value = elemento.value.substring(0, elemento.value.length-1);
+            return false;
         }
     }else{
         return true
     }
 }
+
+
+function numeroTelefono(elemento){
+    console.log(elemento.value.length);
+    if((elemento.value.length === 10) || (elemento.value.length === 7)){
+        console.log("telefono correcto ");
+        return true;
+    }else{
+        elemento.value = "";
+        document.getElementById('mensajeTelefono').innerHTML = 'El telefono debe constar de 10 numeros para moviles o 7 para fijos';
+        return false;
+        
+    }
+}
+
+
+        /**
+         * funcion para validar la longuitud de la cedula:  validacion en base al último dígito verificador.
+         * 
+         * 1.- Se debe validar que tenga 10 numeros
+         * 2.- Se extrae los dos primero digitos de la cedula y compruebo que existan las regiones
+         * 3.- Extraigo el ultimo digito de la cedula y el tercer digito debe ser menor a 6
+         * 4.- Extraigo Todos los pares y los sumo
+         * 5.- Extraigo Los impares los multiplico x 2 si el numero resultante es mayor a 9 le restamos 9 al resultante
+         * 6.- Extraigo el primer Digito de la suma (sumaPares + sumaImpares)
+         * 7.- Conseguimos la decena inmediata del digito extraido del paso 6 (digito + 1) * 10
+         * 8.- restamos la decena inmediata - suma / si la suma nos resulta 10, el decimo digito es cero
+         * 9.- Paso 9 Comparamos el digito resultante con el ultimo digito de la cedula si son iguales todo OK sino existe error.     
+        */
+
+
+function validacionCedula(elemento){
+
+    //instancia de variables
+    var numeroProviancias = 24;  
+    var tercerdigito = 6;  
+    var provincia = 0;
+    var digitoTres= 0;
+    var pares = 0;
+    var numero1 = 0;
+    var numero3 = 0;
+    var numero5 = 0;
+    var numero7 = 0;
+    var numero9 = 0;
+    var impares = 0;
+    var suma_total = 0;
+    var primer_digito_suma = 0;
+    var decena = 0;
+    var digito_validador = 0;
+    var ultimo_digito = 0;
+
+    if(elemento.value.length > 10){
+        elemento.value = elemento.value.substring(0, 10);
+        document.getElementById('mensajeCedula').innerHTML = 'La cedula no puede contener mas de 10 digitos';
+        return false;
+    }else{
+        
+        provincia = parseInt(elemento.value.charAt(0)+""+elemento.value.charAt(1)); 
+        digitoTres = parseInt(elemento.value.charAt(2) + "");  
+        console.log(digitoTres);
+        if ((provincia > 0 && provincia <= numeroProviancias) && digitoTres < tercerdigito) {  
+            
+            
+            //Agrupo todos los pares y los sumo
+            pares = parseInt(elemento.value.substring(1,2)) + parseInt(elemento.value.substring(3,4)) + parseInt(elemento.value.substring(5,6)) + parseInt(elemento.value.substring(7,8));
+
+            //Agrupo los impares, los multiplico por un factor de 2, si la resultante es > que 9 le restamos el 9 a la resultante
+            numero1 = elemento.value.substring(0,1);
+            numero1 = (numero1 * 2);
+            if( numero1 > 9 ){ 
+                numero1 = (numero1 - 9); 
+            }
+
+            numero3 = elemento.value.substring(2,3);
+            numero3 = (numero3 * 2);
+            if( numero3 > 9 ){ 
+                numero3 = (numero3 - 9); 
+            }
+            
+            numero5 = elemento.value.substring(4,5);
+            numero5 = (numero5 * 2);
+            if( numero5 > 9 ){ 
+                numero5 = (numero5 - 9); 
+            }
+  
+            numero7 = elemento.value.substring(6,7);
+            numero7 = (numero7 * 2);
+            if( numero7 > 9 ){ 
+                numero7 = (numero7 - 9); 
+            }
+  
+            numero9 = elemento.value.substring(8,9);
+            numero9 = (numero9 * 2);
+            if( numero9 > 9 ){ 
+                numero9 = (numero9 - 9); 
+            }
+
+            impares = numero1 + numero3 + numero5 + numero7 + numero9;
+
+             //Suma total
+            suma_total = (pares + impares);
+
+            //extraemos el primero digito
+            primer_digito_suma = String(suma_total).substring(0,1);
+
+            //Obtenemos la decena inmediata
+            decena = (parseInt(primer_digito_suma) + 1)  * 10;
+
+            //Obtenemos la resta de la decena inmediata - la suma_total esto nos da el digito validador
+            digito_validador = decena - suma_total;
+
+            //Si el digito validador es = a 10 toma el valor de 0
+            if(digito_validador == 10){
+                var digito_validador = 0;
+            }
+
+            // Extraigo el ultimo digito
+            ultimo_digito   = elemento.value.substring(9,10);
+
+             //Validamos que el digito validador sea igual al de la cedula
+            if(digito_validador == ultimo_digito){
+                console.log('la cedula:' + elemento.value + ' es correcta');
+                return true
+            }else{
+                elemento.value = elemento.value.substring(0, 10);
+                document.getElementById('mensajeCedula').innerHTML = 'La cedula es erronea, modificar';
+                return false;
+            }            
+        }  else{
+            elemento.value = elemento.value.substring(0, 10);
+            document.getElementById('mensajeCedula').innerHTML = 'La cedula es erronea, modificar';
+            return false;
+        }       
+    }
+}
+
+
+function dividirCadenas (elemento, id) {
+    //obtenemos los elementos separados por espacioi
+    var arrayDeCadenas =  elemento.value.trim().split(" ");
+    //Validamos que la cadena conste con dos elementos separados por un espacio 
+    if(arrayDeCadenas.length === 2){
+        console.log('nombres: ' + elemento.value + ' es correcta');
+        return true
+    }else{
+        elemento.value = "";
+        if (id === 'mensajeNombres'){
+            document.getElementById(id).innerHTML = 'ingresar dos nombres completos por favor';
+        }
+        
+        if (id === 'mensajeApellidos'){
+            document.getElementById(id).innerHTML = 'ingresar dos apellidos completos por favor';
+        }
+        return false;
+    }   
+ }
+
+
+function validacionCorreo (elemento) {
+
+    if(elemento.value.length > 0){
+        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
+
+        if((miAscii >= 48 && miAscii <= 57) || (miAscii >= 97 && miAscii <= 122) || (miAscii >= 65 && miAscii <= 90)){
+            console.log("correo electronico correcto");
+            return true;
+        }else {
+            elemento.value = elemento.value.substring(0, elemento.value.length-1);
+            console.log("correo electronico incorrecto");
+            return false;
+        }
+    }else{
+        return true
+    }
+}   
