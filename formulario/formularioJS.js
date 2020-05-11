@@ -29,6 +29,20 @@ function validarCamposObligatorios() {
                 //si falta el telefono se desplega esto
                 document.getElementById('mensajeTelefono').innerHTML = 'El campo telefono esta vacio';
                 break;
+            case 'fechaNacimiento': 
+                //si falta el telefono se desplega esto
+                document.getElementById('mensajeFecha').innerHTML = 'El campo fecha de Nacimiento esta vacia';
+                break;  
+            case 'correo': 
+                //si falta el telefono se desplega esto
+                document.getElementById('mensajeCorreo').innerHTML = 'El campo correo electronico esta vacio';
+                break; 
+            case 'contrasena': 
+                //si falta el telefono se desplega esto
+                document.getElementById('mensajePW').innerHTML = 'El campo contraseña esta vacio';
+                
+                break;     
+                
             default:
                 console.log('default');
             }
@@ -79,33 +93,40 @@ function validarNumeros(elemento){
 }
 
 
-function numeroTelefono(elemento){
-    console.log(elemento.value.length);
-    if((elemento.value.length === 10) || (elemento.value.length === 7)){
-        console.log("telefono correcto ");
-        return true;
+function dividirCadenas (elemento, id) {
+    //obtenemos los elementos separados por espacioi
+    var arrayDeCadenas =  elemento.value.trim().split(" ");
+    //Validamos que la cadena conste con dos elementos separados por un espacio 
+    if(arrayDeCadenas.length === 2){
+        console.log('nombres: ' + elemento.value + ' es correcta');
+        return true
     }else{
         elemento.value = "";
-        document.getElementById('mensajeTelefono').innerHTML = 'El telefono debe constar de 10 numeros para moviles o 7 para fijos';
-        return false;
+        if (id === 'mensajeNombres'){
+            document.getElementById(id).innerHTML = 'ingresar dos nombres completos por favor';
+        }
         
-    }
-}
+        if (id === 'mensajeApellidos'){
+            document.getElementById(id).innerHTML = 'ingresar dos apellidos completos por favor';
+        }
+        return false;
+    }   
+ }
 
 
-        /**
-         * funcion para validar la longuitud de la cedula:  validacion en base al último dígito verificador.
-         * 
-         * 1.- Se debe validar que tenga 10 numeros
-         * 2.- Se extrae los dos primero digitos de la cedula y compruebo que existan las regiones
-         * 3.- Extraigo el ultimo digito de la cedula y el tercer digito debe ser menor a 6
-         * 4.- Extraigo Todos los pares y los sumo
-         * 5.- Extraigo Los impares los multiplico x 2 si el numero resultante es mayor a 9 le restamos 9 al resultante
-         * 6.- Extraigo el primer Digito de la suma (sumaPares + sumaImpares)
-         * 7.- Conseguimos la decena inmediata del digito extraido del paso 6 (digito + 1) * 10
-         * 8.- restamos la decena inmediata - suma / si la suma nos resulta 10, el decimo digito es cero
-         * 9.- Paso 9 Comparamos el digito resultante con el ultimo digito de la cedula si son iguales todo OK sino existe error.     
-        */
+/**
+ * funcion para validar la longuitud de la cedula:  validacion en base al último dígito verificador.
+ * 
+ * 1.- Se debe validar que tenga 10 numeros
+ * 2.- Se extrae los dos primero digitos de la cedula y compruebo que existan las regiones
+ * 3.- Extraigo el ultimo digito de la cedula y el tercer digito debe ser menor a 6
+ * 4.- Extraigo Todos los pares y los sumo
+ * 5.- Extraigo Los impares los multiplico x 2 si el numero resultante es mayor a 9 le restamos 9 al resultante
+ * 6.- Extraigo el primer Digito de la suma (sumaPares + sumaImpares)
+ * 7.- Conseguimos la decena inmediata del digito extraido del paso 6 (digito + 1) * 10
+ * 8.- restamos la decena inmediata - suma / si la suma nos resulta 10, el decimo digito es cero
+ * 9.- Paso 9 Comparamos el digito resultante con el ultimo digito de la cedula si son iguales todo OK sino existe error.     
+*/
 
 
 function validacionCedula(elemento){
@@ -214,25 +235,98 @@ function validacionCedula(elemento){
 }
 
 
-function dividirCadenas (elemento, id) {
-    //obtenemos los elementos separados por espacioi
-    var arrayDeCadenas =  elemento.value.trim().split(" ");
-    //Validamos que la cadena conste con dos elementos separados por un espacio 
-    if(arrayDeCadenas.length === 2){
-        console.log('nombres: ' + elemento.value + ' es correcta');
-        return true
+
+function numeroTelefono(elemento){
+  
+    if((elemento.value.length === 10) || (elemento.value.length === 7)){
+        console.log("telefono correcto ");
+        return true;
     }else{
         elemento.value = "";
-        if (id === 'mensajeNombres'){
-            document.getElementById(id).innerHTML = 'ingresar dos nombres completos por favor';
-        }
-        
-        if (id === 'mensajeApellidos'){
-            document.getElementById(id).innerHTML = 'ingresar dos apellidos completos por favor';
-        }
+        document.getElementById('mensajeTelefono').innerHTML = 'El telefono debe constar de 10 numeros para moviles o 7 para fijos';
         return false;
-    }   
- }
+        
+    }
+}
+
+//Validacion de Fecha de Nacimiento 
+
+
+function validacionCaracteresFecha(elemento){
+    
+    if(elemento.value.length > 0){
+        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
+
+        if(miAscii >= 47 && miAscii <= 57){
+            return true;
+        }else {
+            elemento.value = elemento.value.substring(0, elemento.value.length-1);
+            return false;
+        }
+    }else{
+        return true
+    }
+}
+
+
+function validacionFechaNacimiento(elemento){
+    
+    var fecha = elemento.value.trim().split("/"); 
+    var dia =fecha[0];        
+    var mes = fecha[1];        
+    var anio = fecha[2];  
+    var dmax;
+
+    if ((dia.length == 2) && (mes.length == 2) && (anio.length == 4)) {   
+
+        if((mes <= 12 && mes >=1) && (anio >= 1000 && anio <=3000)){
+            switch (parseInt(mes)) {        
+                case 1:
+                    dmax = 31;break;        
+                case 2: 
+                    //para saber si el anio es bisiesto o no utilizamos modulo
+                    if (anio % 4 == 0) {
+                        dmax = 29;
+                    }else{ 
+                        dmax = 28
+                    };        
+                    break;        
+                case 3:
+                    dmax = 31;break;        
+                case 4:
+                    dmax = 30;break;        
+                case 5:
+                    dmax = 31;break;        
+                case 6:
+                    dmax = 30;break;        
+                case 7:
+                    dmax = 31;break;        
+                case 8:
+                    dmax = 31;break;        
+                case 9:
+                    dmax = 30;break;        
+                case 10:
+                    dmax = 31;break;       
+                case 11:
+                    dmax = 30;break;      
+                case 12:
+                    dmax = 31;break;       
+            }  
+
+            if(dia > 0 && dia < dmax ){
+                console.log("fecha correcta")
+            }else{
+                document.getElementById('mensajeFecha').innerHTML = 'El dia no coincide con la fecha puesta';
+            }
+        }else{
+            document.getElementById('mensajeFecha').innerHTML = 'Mes o año mal ingresados';
+        }
+    } else{ 
+        document.getElementById('mensajeFecha').innerHTML = 'formato fecha mal ingresado /dd/mm/yyyy';
+        return false;        
+    }
+}    
+
 
 
 function validacionCorreo(elemento) {
