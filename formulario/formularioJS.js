@@ -1,3 +1,6 @@
+
+//Validacion que todos los campos tengan algun atributo 
+
 function validarCamposObligatorios() {
     var bandera = true;
     //obtenemos todos los formularios de la pagina y tomamos 
@@ -55,8 +58,11 @@ function validarCamposObligatorios() {
 
     if(!bandera){
         alert('Error: revisar los comentarios');
+        return false;
+    }else{
+        return true;
     }
-    return bandera
+    
 }
 
 //funcion para validar el ingreso solo de letras
@@ -82,6 +88,7 @@ function validarNumeros(elemento){
         var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
 
         if(miAscii >= 48 && miAscii <= 57){
+            console.log("funciona");
             return true;
         }else {
             elemento.value = elemento.value.substring(0, elemento.value.length-1);
@@ -152,12 +159,15 @@ function validacionCedula(elemento){
     if(elemento.value.length > 10){
         elemento.value = elemento.value.substring(0, 10);
         document.getElementById('mensajeCedula').innerHTML = 'La cedula no puede contener mas de 10 digitos';
+        console.log("perrrrrro");
         return false;
+        
     }else{
         
-        provincia = parseInt(elemento.value.charCodeAt(0)+""+elemento.value.charCodeAt(1)); 
-        digitoTres = parseInt(elemento.value.charCodeAt(2) + "");  
-        console.log(digitoTres);
+        //Obtenemos el numero de la caja de texto 
+        provincia = parseInt(elemento.value.charAt(0)+""+elemento.value.charAt(1)); 
+        digitoTres = parseInt(elemento.value.charAt(2) + "");  
+
         if ((provincia > 0 && provincia <= numeroProviancias) && digitoTres < tercerdigito) {  
             
             
@@ -218,12 +228,16 @@ function validacionCedula(elemento){
             ultimo_digito   = elemento.value.substring(9,10);
 
              //Validamos que el digito validador sea igual al de la cedula
+            console.log("ultimo digito" + ultimo_digito);
+            console.log("digito validador " + digito_validador);
+            
+
             if(digito_validador == ultimo_digito){
                 console.log('la cedula:' + elemento.value + ' es correcta');
                 return true
             }else{
                 elemento.value = elemento.value.substring(0, 10);
-                document.getElementById('mensajeCedula').innerHTML = 'La cedula es erronea, modificar';
+                document.getElementById('mensajeCedula').innerHTML = 'La cedula es incorrecta, modificar';
                 return false;
             }            
         }  else{

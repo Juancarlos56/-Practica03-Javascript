@@ -9,6 +9,10 @@
     color: red;
 }
 
+.correcto {
+    color: rgb(135, 243, 135);
+}
+
 .Formulario {
     width: 100%;
     height: 1000px;
