@@ -297,7 +297,7 @@ function validacionCaracteresCorreo(elemento) {
     y un carácter especial (@, _, $)
  */
 
-function validacionCorreo(elemento) {
+function validacionContrasenia(elemento) {
     //Instancia de variables
     var posArroba = 0;
     var longuitudPaswd =0;
@@ -314,15 +314,15 @@ function validacionCorreo(elemento) {
         for(var i=0; i<elemento.value.length; i++){
             caracter = elemento.value.charCodeAt(i);
 
-            uc = function(){isUpperCase(caracter)};
-            lc = function(){isLowerCase(caracter)};
-            nu = function(){isNumber(caracter)};
-            sc = function(){isSpecialChar(caracter)};
+            uc = isUpperCase(caracter);
+            lc = isLowerCase(caracter);
+            nu = isNumber(caracter);
+            sc = isSpecialChar(caracter);
 
-            if(uc == true){ contUC++;}
-            if(lc == true){ contLC++;}
-            if(nu == true){ contNU++;}
-            if(sc == true){ contSC++;}
+            if(uc === true){ contUC++;}
+            if(lc === true){ contLC++;}
+            if(nu === true){ contNU++;}
+            if(sc === true){ contSC++;}
         }
 
         if((contUC > 0)&&(contLC >0)&&(contNU > 0)&&(contSC > 0) ){
@@ -360,8 +360,8 @@ function isNumber(caracter){
     }
 }
 
-function isSpecialChar(){
-    if (caracter === 64 && caracter === 36 && caracter === 95){
+function isSpecialChar(caracter){
+    if (caracter === 64 || caracter === 36 || caracter === 95){
         return true;
     }else{
         return false;
