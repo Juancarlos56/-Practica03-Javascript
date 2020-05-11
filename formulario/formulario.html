@@ -51,7 +51,7 @@
         <br>
 
         <label for="correo">Correo electrónico (*)</label>
-        <input type="email" id="correo" name="correo" value="" placeholder="Ingrese su correo electrónico ..." onblur="return validacionCorreo(this)"  />
+        <input type="text" id="correo" name="correo" value="" placeholder="Ej.: usuario@est.ups.edu.ec ó usuario@ups.edu.ec" " onkeyup="return validacionCaracteresCorreo(this)" onblur="return validacionCorreo(this)"  />
         <span id="mensajeCorreo" class="error"></span>
         <br>
 

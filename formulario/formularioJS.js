@@ -134,8 +134,8 @@ function validacionCedula(elemento){
         return false;
     }else{
         
-        provincia = parseInt(elemento.value.charAt(0)+""+elemento.value.charAt(1)); 
-        digitoTres = parseInt(elemento.value.charAt(2) + "");  
+        provincia = parseInt(elemento.value.charCodeAt(0)+""+elemento.value.charCodeAt(1)); 
+        digitoTres = parseInt(elemento.value.charCodeAt(2) + "");  
         console.log(digitoTres);
         if ((provincia > 0 && provincia <= numeroProviancias) && digitoTres < tercerdigito) {  
             
@@ -235,20 +235,57 @@ function dividirCadenas (elemento, id) {
  }
 
 
-function validacionCorreo (elemento) {
+function validacionCorreo(elemento) {
+    //Instancia de variables
+    var arrobaPos = 0;
+    var puntoPos = 0;
+    var local;
+    var dominio = "ups.edu.ec";
+    var dominioEst = "est.ups.edu.ec";
+    var correo = "";
+    var longuitudCorreo =0;
 
-    if(elemento.value.length > 0){
-        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
+    //Comprobación de que tenemos una @ retorna -1 si no haya
+    posArroba = elemento.value.indexOf('@');
 
-        if((miAscii >= 48 && miAscii <= 57) || (miAscii >= 97 && miAscii <= 122) || (miAscii >= 65 && miAscii <= 90)){
-            console.log("correo electronico correcto");
-            return true;
-        }else {
-            elemento.value = elemento.value.substring(0, elemento.value.length-1);
-            console.log("correo electronico incorrecto");
-            return false;
+    //Comprobacion de longuitud minima de correo
+    longuitudCorreo = elemento.value.substring(0, posArroba);
+    if((posArroba != -1) && (longuitudCorreo.length > 3)){
+        correo = elemento.value.substring(posArroba + 1, elemento.value.length);
+        console.log("correo "+correo)
+        if ((dominio == correo)||(dominioEst == correo) ){
+            console.log("estamos dentro")
+
+        }else{
+            document.getElementById('mensajeCorreo').innerHTML = "No esta con el dominio correcto "+ dominio + " o "+dominioEst;
         }
     }else{
-        return true
+        if(posArroba === -1){
+            document.getElementById('mensajeCorreo').innerHTML = "El correo debe contener @";
+        }else{
+            document.getElementById('mensajeCorreo').innerHTML = "La longitud es demasiada corta";
+        }
     }
-}   
+} 
+
+function validacionCaracteresCorreo(elemento) {
+    var miAscii = '';
+    var correoVal = '';
+    var cadenas;
+    var valorCadena = "";
+    elemento.value = elemento.value.trim();
+    valorCadena = elemento.value.trim() + " ";
+    if(elemento.value.length > 0){
+        for (var i = 0; i < elemento.value.length; i++) {
+            miAscii = elemento.value.charCodeAt(i);
+            if((miAscii >= 48 && miAscii <= 57) || (miAscii >= 97 && miAscii <= 122) || (miAscii >= 64 && miAscii <= 90)||(miAscii ===46)){
+               
+            }else {
+                correoVal = valorCadena.substring(0, i) + valorCadena.substring(i+1, elemento.value.length);
+                elemento.value = correoVal; 
+            }
+        }
+    }else{
+        return true;
+    }
+} 
