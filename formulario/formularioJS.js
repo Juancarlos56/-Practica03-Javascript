@@ -237,9 +237,7 @@ function dividirCadenas (elemento, id) {
 
 function validacionCorreo(elemento) {
     //Instancia de variables
-    var arrobaPos = 0;
-    var puntoPos = 0;
-    var local;
+    var posArroba = 0;
     var dominio = "ups.edu.ec";
     var dominioEst = "est.ups.edu.ec";
     var correo = "";
@@ -250,6 +248,7 @@ function validacionCorreo(elemento) {
 
     //Comprobacion de longuitud minima de correo
     longuitudCorreo = elemento.value.substring(0, posArroba);
+
     if((posArroba != -1) && (longuitudCorreo.length > 3)){
         correo = elemento.value.substring(posArroba + 1, elemento.value.length);
         console.log("correo "+correo)
@@ -273,8 +272,10 @@ function validacionCaracteresCorreo(elemento) {
     var correoVal = '';
     var cadenas;
     var valorCadena = "";
+
     elemento.value = elemento.value.trim();
     valorCadena = elemento.value.trim() + " ";
+
     if(elemento.value.length > 0){
         for (var i = 0; i < elemento.value.length; i++) {
             miAscii = elemento.value.charCodeAt(i);
@@ -283,6 +284,107 @@ function validacionCaracteresCorreo(elemento) {
             }else {
                 correoVal = valorCadena.substring(0, i) + valorCadena.substring(i+1, elemento.value.length);
                 elemento.value = correoVal; 
+            }
+        }
+    }else{
+        return true;
+    }
+} 
+
+/**
+ * Se debe validar que la contraseña ingresada tenga mínimo 8 caracteres,
+    además, debe incluir al menos: una letra mayúscula, una letra minúscula
+    y un carácter especial (@, _, $)
+ */
+
+function validacionCorreo(elemento) {
+    //Instancia de variables
+    var posArroba = 0;
+    var longuitudPaswd =0;
+    var caracter = '';
+    var uc,lc,nu,sc;
+    var contUC = 0;
+    var contLC = 0;
+    var contNU = 0;
+    var contSC = 0;
+    //Comprobacion de long de pasword
+    longuitudPaswd =elemento.value.length;
+
+    if(longuitudPaswd > 8){
+        for(var i=0; i<elemento.value.length; i++){
+            caracter = elemento.value.charCodeAt(i);
+
+            uc = function(){isUpperCase(caracter)};
+            lc = function(){isLowerCase(caracter)};
+            nu = function(){isNumber(caracter)};
+            sc = function(){isSpecialChar(caracter)};
+
+            if(uc == true){ contUC++;}
+            if(lc == true){ contLC++;}
+            if(nu == true){ contNU++;}
+            if(sc == true){ contSC++;}
+        }
+
+        if((contUC > 0)&&(contLC >0)&&(contNU > 0)&&(contSC > 0) ){
+            console.log("contrasenia correcta")
+        }else{
+            document.getElementById('mensajePW').innerHTML = "La contraseña debe contener al menos una mayuscula, minuscula, numero y un caracter especial";
+        }
+
+    }else{
+        document.getElementById('mensajePW').innerHTML = "La longitud de la contraseña es demasiada corta";
+    }
+}
+
+function isUpperCase(caracter){
+    if (caracter >= 65 && caracter < 91){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isLowerCase(caracter){
+    if (caracter >= 97 && caracter < 123){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isNumber(caracter){
+    if (caracter >= 48 && caracter < 58){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isSpecialChar(){
+    if (caracter === 64 && caracter === 36 && caracter === 95){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+
+
+function validacionCaracteresContrasenia(elemento) {
+    var miAscii = '';
+    var contrVal = '';
+    var valorCadena = "";
+    elemento.value = elemento.value.trim();
+    valorCadena = elemento.value.trim() + " ";
+
+    if(elemento.value.length > 0){
+        for (var i = 0; i < elemento.value.length; i++) {
+            miAscii = elemento.value.charCodeAt(i);
+            if((miAscii >= 48 && miAscii <= 57) || (miAscii >= 97 && miAscii <= 122) || (miAscii >= 64 && miAscii <= 90)||(miAscii ===95)||(miAscii ===36)){
+
+            }else { 
+                elemento.value = "";
+                document.getElementById('mensajePW').innerHTML = "Caracter especial invalido. Utilizar(@, _ , $)"; 
             }
         }
     }else{

@@ -56,7 +56,8 @@
         <br>
 
         <label for="constrasena">Contraseña (*)</label>
-        <input type="password" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña ..." />
+        <input type="password" id="contrasena" name="contrasena" value="" placeholder="Ingrese su contraseña ..." onkeyup="return validacionCaracteresContrasenia(this)" onblur="return validacionContrasenia(this)" />
+        <span id="mensajePW" class="error"></span>
         <br>
         
         <input type="submit" id="crear" name="crear" value="Aceptar" />
