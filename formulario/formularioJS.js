@@ -66,36 +66,53 @@ function validarCamposObligatorios() {
 }
 
 //funcion para validar el ingreso solo de letras
-function validarLetras(elemento){
-    if(elemento.value.length > 0){
-        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
-        console.log(miAscii);
 
-        if((miAscii >= 97 && miAscii <= 122) || (miAscii === 32) || (miAscii >= 65 && miAscii <= 90)){
-            return true;
-        }else {
-            elemento.value = elemento.value.substring(0, elemento.value.length-1);
-            return false;
+function validarLetras(elemento) {
+    var miAscii = '';
+    var letrasVal = '';
+    var valorCadena = "";
+
+    elemento.value = elemento.value.trim();
+    valorCadena = elemento.value.trim() + " ";
+
+    if(elemento.value.length > 0){
+        for (var i = 0; i < elemento.value.length; i++) {
+            miAscii = elemento.value.charCodeAt(i);
+            if((miAscii >= 97 && miAscii <= 122) || (miAscii === 32) || (miAscii >= 65 && miAscii <= 90)){
+               
+            }else {
+                letrasVal = valorCadena.substring(0, i) + valorCadena.substring(i+1, elemento.value.length);
+                elemento.value = letrasVal; 
+            }
         }
     }else{
         return true;
     }
-}
+} 
 
 //funcion para validar el ingreso solo de numeros
-function validarNumeros(elemento){
-    if(elemento.value.length > 0){
-        var miAscii = elemento.value.charCodeAt(elemento.value.length-1);
 
-        if(miAscii >= 48 && miAscii <= 57){
-            console.log("funciona");
-            return true;
-        }else {
-            elemento.value = elemento.value.substring(0, elemento.value.length-1);
-            return false;
+function validarNumeros(elemento) {
+    var miAscii = '';
+    var letrasVal = '';
+    var numVal = '';
+    var valorCadena = "";
+
+    elemento.value = elemento.value.trim();
+    valorCadena = elemento.value.trim() + " ";
+
+    if(elemento.value.length > 0){
+        for (var i = 0; i < elemento.value.length; i++) {
+            miAscii = elemento.value.charCodeAt(i);
+            if(miAscii >= 48 && miAscii <= 57){
+               
+            }else {
+                numVal = valorCadena.substring(0, i) + valorCadena.substring(i+1, elemento.value.length);
+                elemento.value = numVal; 
+            }
         }
     }else{
-        return true
+        return true;
     }
 }
 
@@ -105,7 +122,8 @@ function dividirCadenas (elemento, id) {
     var arrayDeCadenas =  elemento.value.trim().split(" ");
     //Validamos que la cadena conste con dos elementos separados por un espacio 
     if(arrayDeCadenas.length === 2){
-        console.log('nombres: ' + elemento.value + ' es correcta');
+        document.getElementById(id).innerHTML = 'Datos Correctos';
+        document.getElementById(id).style.color = '#00BB2D';
         return true
     }else{
         elemento.value = "";
@@ -233,7 +251,8 @@ function validacionCedula(elemento){
             
 
             if(digito_validador == ultimo_digito){
-                console.log('la cedula:' + elemento.value + ' es correcta');
+                document.getElementById('mensajeCedula').innerHTML = 'La cedula es correcta';
+                document.getElementById('mensajeCedula').style.color = '#00BB2D';
                 return true
             }else{
                 elemento.value = elemento.value.substring(0, 10);
@@ -254,6 +273,8 @@ function numeroTelefono(elemento){
   
     if((elemento.value.length === 10) || (elemento.value.length === 7)){
         console.log("telefono correcto ");
+        document.getElementById('mensajeTelefono').innerHTML = 'Telefono correcto';
+        document.getElementById('mensajeTelefono').style.color = '#00BB2D';
         return true;
     }else{
         elemento.value = "";
@@ -329,6 +350,8 @@ function validacionFechaNacimiento(elemento){
 
             if(dia > 0 && dia < dmax ){
                 console.log("fecha correcta")
+                document.getElementById('mensajeFecha').innerHTML = 'fecha correcta';
+                document.getElementById('mensajeFecha').style.color = '#00BB2D';
             }else{
                 document.getElementById('mensajeFecha').innerHTML = 'El dia no coincide con la fecha puesta';
             }
@@ -361,8 +384,8 @@ function validacionCorreo(elemento) {
         correo = elemento.value.substring(posArroba + 1, elemento.value.length);
         console.log("correo "+correo)
         if ((dominio == correo)||(dominioEst == correo) ){
-            console.log("estamos dentro")
-
+            document.getElementById('mensajeCorreo').innerHTML = 'Correo Valido';
+            document.getElementById('mensajeCorreo').style.color = '#00BB2D';
         }else{
             document.getElementById('mensajeCorreo').innerHTML = "No esta con el dominio correcto "+ dominio + " o "+dominioEst;
         }
@@ -434,7 +457,8 @@ function validacionContrasenia(elemento) {
         }
 
         if((contUC > 0)&&(contLC >0)&&(contNU > 0)&&(contSC > 0) ){
-            console.log("contrasenia correcta")
+            document.getElementById('mensajePW').innerHTML = 'Contraseña Valida';
+            document.getElementById('mensajePW').style.color = '#00BB2D';
         }else{
             document.getElementById('mensajePW').innerHTML = "La contraseña debe contener al menos una mayuscula, minuscula, numero y un caracter especial";
         }
@@ -489,7 +513,7 @@ function validacionCaracteresContrasenia(elemento) {
         for (var i = 0; i < elemento.value.length; i++) {
             miAscii = elemento.value.charCodeAt(i);
             if((miAscii >= 48 && miAscii <= 57) || (miAscii >= 97 && miAscii <= 122) || (miAscii >= 64 && miAscii <= 90)||(miAscii ===95)||(miAscii ===36)){
-
+                
             }else { 
                 elemento.value = "";
                 document.getElementById('mensajePW').innerHTML = "Caracter especial invalido. Utilizar(@, _ , $)"; 
