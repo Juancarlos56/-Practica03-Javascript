@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <script type="text/javascript" src="recorridoImagen.js"></script>
+    <link rel="stylesheet" href="estilosImg.css" type="text/css" media="screen">
+</head>
+<body>
+    <section id="recorridoImgen">
+
+        <header class="encabezado">
+            <h1>Recorrido de Imagen</h1>
+        </header>
+
+        <div class="separador"></div>
+
+        <article  class="imagen">
+
+            <div class="formatoImagen">
+                <img src="./imagenes/fondo.jpg" alt="img" id="imagenPresentada"/>
+            </div>
+            
+            <article id="botones">
+                <button type="botton" id="btnIzquierda" name="moverIzquierda" value="Anterior" onclick="return moverIzquierda(this)" disabled> Anterior </button>
+                
+                <button type="botton" id="btnInciar" name="brnIniciar" value="Inciar" onclick="return inciarRecorrido(this)"> Inciar </button>
+                
+                <button type="botton" id="btnDerecha" name="moverDerecha" value="Siguiente" onclick="return moverDerecha(this)" disabled>Siguiente </button> 
+            </article>
+
+
+        </article>
+
+    </section>
+</body>
+</html>

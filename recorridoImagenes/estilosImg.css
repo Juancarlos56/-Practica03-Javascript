@@ -1,0 +1,102 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.error {
+    color: red;
+}
+
+
+.recorridoImgen {
+    width: 100%;
+    height: 1000px;
+}
+
+.encabezado { 
+    width: 100%;
+    height: 100px;
+    float: left;  
+    background-color: black;
+}
+
+
+.encabezado  h1{ 
+    width: 100%;
+    font-size: 50px;
+    text-align: center;
+    color: wheat;
+}
+
+
+
+.separador {
+    width: 100%;
+    height: 0px;
+    background-color: white;
+    clear: both;
+}
+
+.imagen {
+    width: 100%;
+    height: 640px;
+    float: left;
+}
+
+.imagen .formatoImagen{
+    width: 100%;
+    height: 475px;
+    /*padding: 20px;*/
+    margin: 0;
+    /*para la ubicacion de la imagen*/
+    text-align: right;
+}
+
+.imagen #botones {
+    width: 100%;
+    height: 150px;
+    text-align: center;
+    padding-top: 40px;
+    background-color: rgba(245, 241, 234, 0.87);
+    margin: auto;
+    float: left;
+}
+
+#botones button {
+    width: 10%;
+    margin: auto;
+    font-size: 30px;
+    text-align: center;
+    background-color: black;
+    color: rgb(240, 234, 224);
+    border-radius: 6px;
+}
+
+
+#imagenPresentada {
+    width: 100%;
+    top: 0px; 
+    left: 0px;
+    text-align: center;
+}
+
+#imagenOculta {
+    width: 100%;
+    top: 0px; 
+    right: 0px;
+    text-align: center;
+}
+
+#btnIzquierda {
+
+}
+
+#btnInciar {
+    
+}
+
+#btnDerecha {
+    
+}
