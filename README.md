@@ -142,12 +142,8 @@ Se llama a una función la cual me va a obtener 5 numeros entre 0-9, los cuales 
 
 ### Datos de Cuenta de GitHub
 #### Usuario: Juancarlos56
-#### URL: https://github.com/Juancarlos56/Practica02-MiSitioWebCSS
+#### URL: https://github.com/Juancarlos56/Practica03-Javascript
 
 ## CONCLUSIONES:
 
-### A través de esta práctica se logró comprender los conceptos básicos de html5 y CSS y sus respectivas funcionalidades que posee cada etiqueta, y para que funcionan cada una de ellas, además de eso se logró comprender una estructura correcta de cómo desarrollar una página web pero sabiendo también que eso va a depender del gusto de cada uno. Se logro corregir errores a través de la plataforma web https://validator.w3.org/ la cual fue de gran utilidad para ver en que estaba fallando con la sintaxis de html5 y CSS.
-
-
-
-
+### A través de esta práctica se logró reforzar los conceptos antes vistos html5, css y ahora javascript; en esta práctica se profundizo en el tema de js, por lo que al momento de realizar esta práctica se pudo comprender de una mejor manera la sintaxis y el funcionamiento como tal de javascrit, se logró realizar las distintas peticiones de la practica a cabalidad. 
