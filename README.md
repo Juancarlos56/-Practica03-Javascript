@@ -100,6 +100,47 @@ Función para validar si la cedula es correcta.
 ![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/php.png)
 
 
+#### 2.	Diseñar una interfaz en html que tenga tres botones que diga “Anterior”, “Iniciar”, “Siguiente”, y una imagen. Luego, desde javascript se debe controlar para al hacer clic sobre uno de los botones realice una acción relacionada a una galería de imágenes (ver ejemplo, https://gihp4c.blog.ups.edu.ec/)
+
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/recorridoInterfaz.png)
+
+
+####  Indicaciones: 
+####  Se debe tener, un arreglo con los nombres de diez imágenes, previamente descargadas y almacenadas en una carpeta llamada “images”. 
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/10Imagenes.png)
+
+#### La galería de imágenes debe visualizar exclusivamente 5 imágenes. 
+Se llama a una función la cual me va a obtener 5 numeros entre 0-9, los cuales luego se le asigna al vector de imágenes. 
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/CincoImagenes.png)
+
+####  Cada vez que se haga clic en le botón iniciar se deben escoger de manera aleatoria cinco imágenes de las diez que se mostrarán en la galería de imágenes. 
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/funcionInicio.png)
+
+#### Al hacer clic en el botón siguiente o anterior se debe cambiar la imagen presentada en la galería. 
+#### Al hacer clic en el botón siguiente y haber llegado a la última imagen disponible, el botón siguiente deberá ser deshabilitado (sólo cuando se ha llegado a la última imagen el botón siguiente deberá estar deshabilitado) 
+#### Al hacer clic en el botón anterior y haber llegado a la primera imagen disponible, el botón anterior deberá ser deshabilitado (sólo cuando se ha llegado a la última imagen y cuando se inicie la galería de imágenes el botón anterior deberá estar deshabilitado)
+
+######  Función para botón siguiente
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/funcionDesplazamiento1.PNG)
+#####  Función para botón anterior
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/funcionDesplazamiento2.PNG)
+
+### 3.	Realizar una calculara en HTML usando botones de javascript y una caja de texto para visualizar el resultado. Las operaciones que podrá hacer la calculadora son: suma, resta, multiplicación y división. Además, se podrá limpiar la memoria de la calculadora. Por último, se debe usar la función eval() para realizar las operaciones aritméticas
+
+###  Interfaz de la Calculadora
+####  Código 
+##### Botones de javascript y una caja de texto
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/formularioDatosErroneos.png)
+######  HTML: 
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/htmlCalcu.PNG)
+######  JavaScript:
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/jsCalcu.PNG)
+#####  Dusar la función eval() para realizar las operaciones aritméticas
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/evalCalcu.PNG)
+####  Comprobación
+![](https://github.com/Juancarlos56/Practica03-Javascript/blob/master/informe/resultadosCalcu.PNG)
+
+### Datos de Cuenta de GitHub
 #### Usuario: Juancarlos56
 #### URL: https://github.com/Juancarlos56/Practica02-MiSitioWebCSS
 
